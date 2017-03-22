@@ -5,7 +5,7 @@
 # This script emails you the IP address if it detects an ethernet address other than it's usual address
 # that it normally has, i.e. on your home network.  
  
-import smtplib, string, subprocess
+import smtplib, string, subprocess, time
 
 ################################################
 ###### Remember to set all constants here ######
