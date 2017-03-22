@@ -1,5 +1,6 @@
-Is **mandatory** to change propoerly the *email config section* in the Python script:
-  
+Is **mandatory** to change propoerly the *email config section* in the Python script and
+ **YOU MUST ACTIVATE "INSECURE APPS IN GMAIL**
+ 
   ```
   ################################################
   ###### Remember to set all constants here ######
