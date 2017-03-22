@@ -10,13 +10,16 @@ import smtplib, string, subprocess, time
 ################################################
 ###### Remember to set all constants here ######
 ################################################
+# YOU MUST ACTIVATE "INSECURE APPS IN GMAIL" 
 FIXED_IP = '10.0.1.2'
 IP_FILEPATH = '/home/pi/current_ip.txt'
 SMTP_USERNAME = 'YOUR_SENDER_EMAIL_ADDRESS@gmail.com'
 SMTP_PASSWORD = 'YOUR_PASSWORD'
 SMTP_RECIPIENT = 'YOUR_RECEPTOR_EMAIL_ADDRESS@gmail.com'
 SMTP_SERVER = 'smtp.gmail.com'
-SSL_PORT = 587
+SSL_PORT = 465
+# YOU MUST ACTIVATE "INSECURE APPS IN GMAIL" 
+################################################
 ################################################
  
     
@@ -45,12 +48,13 @@ for line in ip_file:
                 '',
                 text
                 ), '\r\n')
-            smtpserver = smtplib.SMTP(SMTP_SERVER, SSL_PORT)
+            smtpserver = smtplib.SMTP_SSL(SMTP_SERVER, SSL_PORT)
             smtpserver.ehlo()
             smtpserver.starttls()
             smtpserver.login(SMTP_USERNAME, SMTP_PASSWORD)
             smtpserver.sendmail(FROM, [TO], BODY)
             smtpserver.close()
+                    
             print '[' + '\033[36;1m' + 'info'  + '\033[0m' + ']' + ' Emailing eth0 IP address ' + inet_string + ' to ' + TO + ' from ' + FROM
   
         elif inet_string == FIXED_IP:
