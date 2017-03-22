@@ -16,7 +16,7 @@ SMTP_USERNAME = 'YOUR_SENDER_EMAIL_ADDRESS@gmail.com'
 SMTP_PASSWORD = 'YOUR_PASSWORD'
 SMTP_RECIPIENT = 'YOUR_RECEPTOR_EMAIL_ADDRESS@gmail.com'
 SMTP_SERVER = 'smtp.gmail.com'
-SSL_PORT = 465
+SSL_PORT = 587
 ################################################
  
     
@@ -45,10 +45,12 @@ for line in ip_file:
                 '',
                 text
                 ), '\r\n')
-            server = smtplib.SMTP(SMTP_SERVER)
-            # server.login(SMTP_USERNAME, SMTP_PASSWORD)
-            server.sendmail(FROM, [TO], BODY)
-            server.quit()
+            smtpserver = smtplib.SMTP(SMTP_SERVER, SSL_PORT)
+            smtpserver.ehlo()
+            smtpserver.starttls()
+            smtpserver.login(SMTP_USERNAME, SMTP_PASSWORD)
+            smtpserver.sendmail(FROM, [TO], BODY)
+            smtpserver.close()
             print '[' + '\033[36;1m' + 'info'  + '\033[0m' + ']' + ' Emailing eth0 IP address ' + inet_string + ' to ' + TO + ' from ' + FROM
   
         elif inet_string == FIXED_IP:
