@@ -1,13 +1,12 @@
 [Unit]
 Description=Check IP and send email if on foreign network
-# Wait until the network is up and has an IP
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=oneshot
-ExecStart=/usr/bin/python3 /home/pi/check_ip_no_auth.py
-User=pi
+ExecStart=/usr/bin/python3 /usr/local/bin/check_ip_no_auth.py
+EnvironmentFile=/etc/check-ip-email.env
 StandardOutput=journal
 StandardError=journal
 
